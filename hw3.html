@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<style>
+		html {
+			font-size: 15px;
+		}
+
+		:root {
+			--yellow: #fcd116;
+			--green: #0f8e4c;
+		}
+
+		.poem{
+			background-color: lightgray;
+			text-align: center;
+			position: static;
+		}
+
+		.image-back {
+			position: relative;
+			background-color: black;
+			height: 400px;
+		}
+
+		.image {
+			position: absolute;
+			bottom: calc(100% - 400px);
+			left: 15px;
+			clip: rect(0px, 100px, 80px, 0px);
+		}		
+
+		.fixed {
+			position: fixed;
+		}
+		
+		.display {
+			display: list-item;
+		}
+		
+		.none{
+			display: none;
+		}
+
+		#id1{
+			color: var(--yellow);
+		}	
+		
+		#rem1{
+			font-size: 2rem;
+		}
+
+		#rem2{
+			font-size: 3rem;
+		}
+
+		section p {
+			font-size: 0.5cm;
+			line-height: 1.5em;
+			display: inline;
+		}
+
+		span {
+			font-size: 2em;
+			display: block;
+		}
+	
+		ul > li {
+			color: white;
+			background-color: var(--green);
+			text-align: center;
+		}	
+
+		h1 ~ h2 {
+			color: #afedda;
+		}
+
+		a:link {
+			color: yellow;
+		}
+
+		a:visited {
+			color: red;
+		}
+
+		p::before {
+			content: "Абзац: ";
+		}
+		
+		h4::after {
+			content: "Заголовок h4";
+		}
+	</style>
+	<meta charset="UTF-8">
+	<title>Заголовок</title>
+</head>
+
+<body>
+	<section class="Introduction">
+		<h1>Что-то обо мне</h1>
+		<h2><i>Второй заголовок обо мне</i></h2>
+		<h3 id="id1">Селектор по id</h3>
+	</section>
+
+	<section class="MIPT">
+		<p>Видим, что X Y применился ко всем p</p>
+		<span>Так работает em</span>
+	</section>
+		<p>Размер текста 10 px</p>
+		
+		<span id="rem1">Размер текста равен 2*15 px<br>
+		<span id="rem2">Размер текста равен 3*15 px и не зависит от размера родительского элемента</span></span>
+	<section class="After study">
+		<p style="color:blue"> Каскадные стили <ins style="color: red">Применились все стили</ins></p>
+		<p>уточнение было дообавлено, потому что я этим практически не занимаюсь, это правда</p>
+
+		<ul>
+			<li>Рисую</li>
+			<li>Учусь петь</li>
+			<div class="display">Пишу</div>
+		</ul>
+	
+
+		<a href="https://masterimargo.ru/book.htm">Ссылка на мою любимую книгу<br></a>
+
+		<div class="image-back">
+			<div class="image">
+				<img src="image.jpg" width="200px" height="300px">
+			</div>
+		</div>
+
+		<table>
+			<tr>
+				<td>Sport</td>
+				<td>attitude</td>
+			</tr>
+			<tr>
+				<td>Волейбол</td>
+				<td>9/10</td>
+			</tr>
+			<tr>
+				<td>Баскетбол</td>
+				<td>7/10</td>
+			</tr>
+			<tr>
+				<td>Хоккей</td>
+				<td>10/10</td>
+			</td>
+		</table>
+
+		<article class="poem">
+			<h3><b>Владимир Высоцкий</b></h3>
+			<h4><i>Что-то ничего не пишется </i></h4>
+			<p>Что-то ничего не пишется,<br>Что-то ничего не ладится —<br>Жду: а вдруг талант отыщетя<br>Или нет — какая разница!<br>
+		</article>
+	</section>
+
+	<div class="none">Что-то, чего нет</div>
+
+	<div class="fixed">
+		<img src="image.jpg" width="5000px" height="500cm">
+	</div>
+</body>
+</html>
+
