@@ -1,0 +1,118 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<script type="text/javascript">
+		
+		global = "It's global";
+
+		function pow(n,power){
+			
+			let pow = 1.0;
+			if (n === 1) return 1;
+			if (n === 0) return 0;
+			if (pow === 0) return 1;
+			
+			for (let i = 1; i <= power; i++){
+				
+				pow = pow * n;
+			}
+			return pow;
+		}
+
+		
+		console.log("3^5 = %f", pow(3, 5)); //1
+
+	{
+		var a = 2, b = 8;
+		let c = 3, d = 4;
+
+		console.log("Внутри блока все хорошо a^b = %f", pow(a, b));
+		console.log("Внутри блока все хорошо c^d = %f", pow(c, d));
+
+	}
+
+	{
+		console.log("Вне блока var вытек a^b = %f", pow(a, b));
+	}
+
+	try {
+		
+		console.log("Вне блока let не вытекает c^d = %f", pow(c, d));
+
+	} catch(error) {
+
+		console.log("Ловим ошибку %s при обращении к переменным let вне блока", error.name); 
+
+	} //2
+
+	{
+		let a = "2633782";
+		let b = 2633782;
+		
+		console.log("a == b <=> %s", a == b);
+		console.log("a === b <=> %s", a === b);
+
+	} //3
+		
+	{
+		console.log("typeof(3) = %s", typeof(3));
+		console.log("typeof(\"3\") = %s", typeof("3"));
+		console.log("typeof(pow) = %s", typeof(pow));
+		console.log("typeof(d) = %s", typeof(d)); 
+
+	} //4
+
+	{
+		let arr = [1, 10, 34, 78];
+		let sum = 0;
+
+		for (let i of arr){
+			sum = sum + i;
+		}
+		
+		console.log("Сумма элементов массива = %d", sum);
+
+	} //5
+
+	{
+		console.log("Значение глобальной переменной = %s", global);
+		delete global;
+		console.log("Удалили глобальную переменную, теперь global = %s", typeof(global));
+	}//6
+
+	{
+		let comp = (a, b) => a * b;
+		console.log("Comp = %d", comp(3, 5)); 
+	} //7
+
+	{
+		let arr = [1, "1", pow, 5];
+		let [a, b, c, d] = arr;
+		
+		console.log("a = %d", a);
+		console.log("b = %s", b);
+		console.log("c = ", c);
+		console.log("d = %d", d);
+
+		[a, b, c, d] = [c, b, a, d]
+
+		console.log("a = ", a);
+		console.log("b = %s", b);
+		console.log("c = %d", c);
+		console.log("d = %d", d);
+
+	} //8
+
+	{
+		console.log("Округление вверх до целого. 4.09 => %d", Math.ceil(4.09));
+	} //9
+
+	</script>
+</body>			
+
+</html>
