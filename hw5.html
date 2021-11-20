@@ -1,0 +1,252 @@
+<html>
+
+<head>
+	<meta charset = "utf-8">
+</head>
+
+<body>
+	
+	<script type = "text/javascript">
+
+	globalThis["PI"] = 3.14;	
+//1
+	{
+		let A = {
+
+			sum() {
+				return this.a + this.b;
+			},
+
+			c: 1
+
+		}
+		
+		let A_1 = Object.create(A);
+		A_1.a = 2;
+		A_1.b = 3;
+		console.log("A_1", A_1);
+		console.log("A_1 sum = ",A_1.sum());
+		
+		console.log("A.c = %d, A_1.c = %d", A.c, A_1.c);
+		A.c = 7;
+		console.log("A.c = %d, A_1.c = %d", A.c, A_1.c);
+		
+		A_1.c = 8;
+		console.log("A.c = %d, A_1.c = %d", A.c, A_1.c);
+	}
+
+	{
+		class Circle {
+			
+			constructor(R) {
+				this.R = R;
+				this.d = "d = 2*R";
+			}
+	
+			area() {
+				return PI * Math.pow(this.R, 2);
+			}
+		}
+
+		C_1 = new Circle(7);
+
+		console.log("C_1 area = ", C_1);
+		console.log("C_1 area = ", C_1.area());
+		
+		console.log(C_1.d);
+	}
+
+//2
+	{
+		let cat = {
+			food: "milk"
+		}
+
+		let tiger = {
+			growl: true
+		}
+
+		Object.setPrototypeOf(cat,tiger);
+
+		console.log("cat.food = ", cat.food);
+		console.log("tiger.growl = ", cat.growl);
+		console.log("But tiger.food = ", tiger.food);
+		console.log(Object.getPrototypeOf(cat) === tiger);
+	}
+
+//3
+	{
+		class Ellipse {
+
+			constructor(a, b) {
+				this.a = a;
+				this.b = b;
+				this.name = "Ellipse";
+			}
+			
+			area() {
+				return PI * this.a * this.b;
+			}
+		}
+
+		class Circle extends Ellipse {
+		
+			constructor(R) {
+				super(R, R);
+				this.name = "Circle";
+			}
+		}
+	
+		let C_2 = new Circle(9);
+
+		console.log(C_2);
+		console.log("C_2.area = ", C_2.area());
+
+	}		
+
+//4
+	{
+		let a = {};
+		
+		Object.defineProperty(a, 'b', {
+			value: 77,
+			writable: true,
+			enumerable: false,
+			configurable: true
+		});
+
+		for (let i in a) {
+			console.log(i);
+		}
+		
+		console.log("But a.b = ", a.b);
+
+		Object.defineProperty(a, 'c', {
+			value: 33,
+			writable: false,
+			enumerable: true,
+			configurable: true
+		});
+
+		a.c = 44;
+		console.log("a.c = ", a.c);
+
+		Object.defineProperty(a, 'd', {
+			
+			set: function(value) {
+				this.b = value;
+				return value;
+			}
+		});
+
+		a.d = 1;
+		console.log("a.b = %d", a.b);
+	}
+
+//5
+	{	
+		function Circle(R){
+	
+			this.R = R;
+			
+			if (R < 0) {
+				console.log("Отрицательный радиус");
+				return undefined;
+			}
+		}
+
+		function Area(R) {
+			Circle.call(this, R);
+			this.a = PI * Math.pow(this.R, 2);
+		}
+
+		let s = new Area(6);
+		console.log(s.a, s.R);
+	}
+//6
+	{
+		String.prototype.print = function() {
+		
+			console.log("В строке %s количество символов равно %d", this, this.length);
+
+		}
+
+		str = "dhsjouhr";
+		str.print();
+
+	}
+//7
+	{
+
+		class Prot_PI {
+
+			_PI = 0;
+
+			set PI (value) {
+				if ((Math.round(value)) !== 3) {
+					throw new Error("Ошибка");
+				}
+				this._PI = value;
+			}
+
+			get PI() {
+				return this._PI;
+			}
+		}
+					
+		let pi_1 = new Prot_PI();
+
+		pi_1.PI = 3.14;
+		console.log("pi_1.PI = ", pi_1.PI);
+
+		try {
+			
+			pi_1.PI = 10;
+
+		} catch(error) {
+				
+			console.log("Ошибка %s при введении неверного значения пи", error.name);
+
+		}
+//	
+		class Ellipse {
+
+			constructor(a, b) {
+				this.a = a;
+				this.b = b;
+			}
+
+			#name = "Ellipse";
+			area() {
+                 return PI * this.a * this.b;
+             }
+			
+		}
+
+		let E1 = new Ellipse(5, 5);
+		
+/*		try {
+			E1.#name = "Circle"; //Нельзя обращать к приватному свойству, поэтому вылетит синтаксичесая ошибка: SyntaxError: reference to undeclared private field or method #name
+		} catch(error) {
+			
+			console.log("Ошибка %s при изменении значения приватного поля", error.name);
+			
+			}	*/	
+
+//
+		let print = {
+			printArea () {
+				console.log("Площадь эллипса = %f", this.area());
+			}
+		}
+
+		Object.assign(Ellipse.prototype, print);
+
+		E1.printArea();
+
+}
+			
+	</script>
+</body>
+
+</html>
