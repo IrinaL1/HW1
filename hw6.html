@@ -15,6 +15,12 @@
 	</head>
 	<body onclick="DiffTarg(event)">
 
+		<div class="callmebabe">
+			<div class="yeah">
+				<p>More</p>
+			</div>
+		</div>
+
 		<h1 id = 'h1' class = "old_style"><i>Заголовок h1</i></h1>
 		<p style = "color: red"><b>Абзац</b></p>
 		<div id = 'div1'><p id = 'p'>Что-то</p></div>
@@ -37,6 +43,11 @@
 			for (let i = 0; i < l; i++) {
 				console.log("Дочерний элемент", document.body.childNodes[i]);
 				console.log("Атрибуты дочернего элемента", document.body.childNodes[i].attributes);
+				if (document.body.childNodes[i].attributes != undefined)
+				{
+					document.body.childNodes[i].setAttribute("name", "Me is " + i);
+					console.log("Атрибуты дочернего элемента (after)", document.body.childNodes[i].attributes);
+				}
 			}
 
 			//использование переменной arguments
@@ -50,7 +61,7 @@
 			L(3.14, 5);
 
 			//первый потомок
-			console.log("Первый потомок", document.body.firstChild);
+			console.log("Первый потомок (innerHtml) :", document.body.firstElementChild.innerHTML);
 
 			//последний узел
 			console.log("Последний узел", document.body.lastChild);
@@ -92,11 +103,12 @@
 				event.preventDefault();
 			}
 
-			a.addEventListener("click", stopA);
+			a.setAttribute("onclick", "stopA(event)");
 
 			//погружение/всплытие
-			for (let i = 0; i < l; i++){
-				document.body.childNodes[i].addEventListener("click", alert("Погружение: " +  document.body.childNodes[i]));
+			for (let elem of document.querySelectorAll('*')){
+				elem.addEventListener("click", e => alert("Погружение: " + elem.tagName), true);
+				elem.addEventListener("click", e => alert("Всплытие: " +  elem.tagName));
 			}
 			
 			//разные target
