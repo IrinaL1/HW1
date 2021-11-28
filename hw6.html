@@ -96,7 +96,7 @@
 			}
 			
 			let elem = document.getElementById('p'); 
-			elem.addEventListener("click", changeText);
+			elem.addEventListener("click", changeText, {once: true});
 
 			//attribute event(add/remove)
 			function stopA(event) {
@@ -106,7 +106,7 @@
 			a.setAttribute("onclick", "stopA(event)");
 
 			//погружение/всплытие
-			document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, Event.CAPTURING_PHASE));
+			document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, {capture: true}));
 			document.addEventListener("click", e => alert("Всплытие: " + e.target.tagName));
 			
 			//разные target
