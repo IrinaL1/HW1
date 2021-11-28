@@ -106,7 +106,7 @@
 			a.setAttribute("onclick", "stopA(event)");
 
 			//погружение/всплытие
-			document.addEventListener("click", e => alert("Погружение: " + e.target.tagName), true);
+			document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, Event.CAPTURING_PHASE));
 			document.addEventListener("click", e => alert("Всплытие: " + e.target.tagName));
 			
 			//разные target
