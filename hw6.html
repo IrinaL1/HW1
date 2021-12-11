@@ -1,0 +1,119 @@
+<html>
+
+	<head>
+		<meta charset = "utf-8">
+		<style>
+			.old_style{
+				color: dddddd;
+				font-size: 40px;
+			}
+			.new_style{
+				color: coral;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body onclick="DiffTarg(event)">
+
+		<div class="callmebabe">
+			<div class="yeah">
+				<p>More</p>
+			</div>
+		</div>
+
+		<h1 id = 'h1' class = "old_style"><i>Заголовок h1</i></h1>
+		<p style = "color: red"><b>Абзац</b></p>
+		<div id = 'div1'><p id = 'p'>Что-то</p></div>
+		
+		<button id = "btn1">Switch class</button>
+		<a id = "a"  href = "#">Ссылка</a>
+		<script type = "text/javascript">
+			
+			//Создание элемента
+			let h_5 = document.createElement ('h5');
+			h_5.textContent = "Заголовок h5";
+			let element = document.body;
+			element.appendChild(h_5);
+
+			//Удаление элемента
+//			element.removeChild(h_5);
+
+			//навигация, атрибуты
+			let l = document.body.childNodes.length;
+			for (let i = 0; i < l; i++) {
+				console.log("Дочерний элемент", document.body.childNodes[i]);
+				console.log("Атрибуты дочернего элемента", document.body.childNodes[i].attributes);
+				if (document.body.childNodes[i].attributes != undefined)
+				{
+					document.body.childNodes[i].setAttribute("name", "Me is " + i);
+					console.log("Атрибуты дочернего элемента (after)", document.body.childNodes[i].attributes);
+				}
+			}
+
+			//использование переменной arguments
+			function L(pi, R) {
+
+				console.log("pi = ", arguments[0]);
+				console.log("R = ", arguments[1]);
+				console.log("l = ", 2 * pi * R);
+			}
+
+			L(3.14, 5);
+
+			//первый потомок
+			console.log("Первый потомок (innerHtml) :", document.body.firstElementChild.innerHTML);
+
+			//последний узел
+			console.log("Последний узел", document.body.lastChild);
+			console.log("Последний узел", document.body.childNodes[l-1]);
+
+			//предыдущий узел
+			console.log("Предыдущий узел", document.body.previousSibling);
+			console.log("Предыдущий узел", document.getElementById('div1').previousElementSibling);
+
+			//вставка перед элементом
+			let span1 = document.createElement('span');
+			span1.textContent = "Вставляем перед p в div";
+			div1.insertBefore(span1, div1.children[0]);
+
+			//поиск элемента по селектору
+			console.log("Нашел первый p ", document.querySelector('p'));
+
+			//переключение класса и мышка
+			btn1.onclick = function(event) {
+				let elem = document.getElementById('h1');
+				elem.classList.toggle("new_style");
+			}			
+
+			//add event
+			function changeText(event) {
+				let p = document.getElementById('p');
+				if (p.childNodes[0].nodeValue == "Что-то") {
+					p.childNodes[0].nodeValue = "С чем-то";
+				} else {
+					p.childNodes[0].nodeValue = "Что-то";
+				} 
+			}
+			
+			let elem = document.getElementById('p'); 
+			elem.addEventListener("click", changeText, {once: true});
+
+			//attribute event(add/remove)
+			function stopA(event) {
+				event.preventDefault();
+			}
+
+			a.setAttribute("onclick", "stopA(event)");
+
+			//погружение/всплытие
+			document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, {capture: true}));
+			document.addEventListener("click", e => alert("Всплытие: " + e.target.tagName));
+			
+			//разные target
+			function DiffTarg(event) {
+				event.target.style.color = 'green';
+			}
+			//то, на что нажимаем, становится зеленым			
+		</script>
+	</body>
+</html>
