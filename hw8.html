@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+		<script>
+			function change_dot(x, y, color) {
+				let dot = document.getElementById("svg");
+				dot.setAttribute("d", "M100 70 C 60 " + x + ", " + y + " 15" + ", " + "85 70 S 120 100, 60 130");
+				console.log(dot.d);
+				dot.setAttribute("stroke", color);
+			}
+			
+			
+		</script>
+
+		<svg height="250" width="250">
+			<path id="svg" d="M100 70 C 60 20, 55 15, 85 70 S 120 100, 60 130" stroke="black" fill="transparent"/>
+		</svg>
+		<button onclick="change_dot(50, 30, 'orange')">Меняем точку</button>
+
+		<canvas id="my picture" width="500" height="500"></canvas>
+		<script>
+			function draw() {
+				let canvas = document.getElementById('my picture');
+				let ctx = canvas.getContext('2d');
+				for (let i = 0; i <= 5; i++){
+					ctx.fillStyle="green";
+					ctx.fillRect(20 + i * 60, 20, 60, 60);
+					ctx.strokeRect(20 + i * 60, 20, 60, 60);
+				}
+				ctx.fillStyle="green";
+				ctx.fillRect(380, 0, 80, 80);
+				ctx.strokeRect(380, 0, 80, 80);
+				ctx.moveTo(415, 40);
+				ctx.arc(420, 40, 20, 0, Math.PI, false);
+				ctx.moveTo(395, 20);
+				ctx.arc(400, 20, 5, 0, Math.PI * 2);
+				ctx.moveTo(435, 20);
+				ctx.arc(440, 20, 5, 0, Math.PI * 2);
+				ctx.stroke();
+			}
+		</script>
+
+		<button onclick="draw()">Нарисуй гусеницу</button>
+	</body>
+
+</html>
